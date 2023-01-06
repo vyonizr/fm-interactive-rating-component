@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Frontend Mentor | Interactive rating component</title>
+    <script src="jquery-3.6.3.min.js"></script>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body
+    class="flex flex-col items-center justify-center h-screen m-0 text-sans bg-woodSmoke"
+  >
+    <main
+      class="flex h-[22.5rem] w-[20.625rem] flex-col justify-between rounded-3xl bg-customVeryDarkBlue p-4 lg:h-[26rem] lg:w-[26rem] lg:p-8"
+      id="rating-card"
+    >
+      <section class="circular-icon">
+        <img alt="star icon" src="./images/icon-star.svg" />
+      </section>
+
+      <h1 class="text-2xl text-white lg:text-3xl">How did we do?</h1>
+      <p class="text-customLightGrey">
+        Please let us know how we did with your support request. All feedback is
+        appreciated to help us improve our offering!
+      </p>
+
+      <form class="flex h-[6.875rem] w-full flex-col justify-between" action="">
+        <ol class="grid justify-between w-full grid-flow-col auto-cols-max">
+          <input type="button" value="1" class="rating-button" />
+          <input type="button" value="2" class="rating-button" />
+          <input type="button" value="3" class="rating-button" />
+          <input type="button" value="4" class="rating-button" />
+          <input type="button" value="5" class="rating-button" />
+        </ol>
+        <input
+          type="submit"
+          value="Submit"
+          id="btn-submit"
+          class="w-full py-3 tracking-widest text-white uppercase rounded-full cursor-pointer bg-customOrange enabled:hover:bg-white enabled:hover:text-customOrange"
+          disabled
+        />
+      </form>
+    </main>
+
+    <main
+      class="mt-8 flex h-[22.5rem] w-[20.625rem] flex-col items-center justify-between rounded-3xl bg-customVeryDarkBlue px-4 py-8 lg:h-[26rem] lg:w-[26rem] lg:p-10"
+      id="thank-you-card"
+    >
+      <figure class="h-24">
+        <img
+          alt="thank you illustration"
+          src="./images/illustration-thank-you.svg"
+        />
+      </figure>
+      <p
+        id="rating-summary"
+        class="px-4 py-2 mt-6 rounded-full bg-customDarkBlue text-customOrange"
+      ></p>
+      <h1 class="mt-4 text-2xl text-white lg:text-3xl">Thank you!</h1>
+      <p class="text-center text-customLightGrey">
+        We appreciate you taking the time to give a rating. If you ever need
+        more support, don't hesitate to get in touch!
+      </p>
+    </main>
+
+    <footer class="attribution text-customLightGrey">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="https://www.frontendmentor.io/profile/vyonizr" target="_blank"
+        >vyonizr</a
+      >.
+    </footer>
+
+    <script>
+      $(document).ready(function () {
+        let selectedRating = '';
+        const ratingButtons = document.getElementsByClassName('rating-button');
+
+        for (let i = 0; i < ratingButtons.length; i++) {
+          ratingButtons[i].addEventListener('click', function () {
+            const current = document.getElementsByClassName(
+              'rating-button-active'
+            );
+            if (current.length > 0) {
+              current[0].className = current[0].className.replace(
+                ' rating-button-active',
+                ''
+              );
+            }
+
+            selectedRating = $(this).val();
+            $('#btn-submit').removeAttr('disabled');
+            this.className += ' rating-button-active';
+          });
+        }
+
+        $('#thank-you-card').hide();
+        $('#btn-submit').click(function (e) {
+          if (selectedRating.length > 0) {
+            e.preventDefault();
+            $('#rating-card').toggle();
+            $('#rating-summary').append(
+              `You selected ${selectedRating} out of ${ratingButtons.length}`
+            );
+            $('#thank-you-card').show();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

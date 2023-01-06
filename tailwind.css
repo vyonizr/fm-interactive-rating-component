@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Overpass';
+  font-weight: 400;
+  src: url('./public/fonts/overpass/Overpass-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Overpass';
+  font-weight: 700;
+  src: url('./public/fonts/overpass/Overpass-Bold.ttf');
+}
+
+.circular-icon {
+  @apply w-12 h-12 rounded-full flex justify-center items-center text-customMediumGrey bg-customDarkBlue
+}
+
+.rating-button {
+  @apply circular-icon hover:text-white hover:bg-customLightGrey active:bg-customOrange active:text-white cursor-pointer
+}
+
+.rating-button-active {
+  @apply bg-customOrange text-white hover:bg-customOrange hover:text-white
+}
+
+p {
+  @apply text-[15px]
+}
